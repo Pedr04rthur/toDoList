@@ -1,0 +1,61 @@
+<div class="bg-slate-50 min-h-screen p-6">
+  <div class="max-w-6xl mx-auto">
+    <header class="mb-6">
+      <h1 class="text-3xl font-bold text-slate-800">{{ title }}</h1>
+    </header>
+
+    <div class="mb-6 flex items-center justify-between">
+      <div>
+        <p class="text-slate-600">Clique no botão para adicionar uma  tarefa<span class="font-semibold">+</span>.</p>
+      </div>
+      <div>
+        <button 
+          (click)="openModal()"
+          aria-label="Adicionar tarefa" 
+          class="w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center text-2xl hover:bg-indigo-700 transition-colors"
+        >
+          +
+        </button>
+      </div>
+    </div>
+
+    <app-task-form
+      *ngIf="showModal()"
+      [editingTask]="editingTask()"
+      (close)="closeModal()"
+      (save)="onSaveTask($event)"
+    ></app-task-form>
+
+    <main>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <app-task-column
+          status="todo"
+          title="Para fazer"
+          [tasks]="todoTasks()"
+          (taskEdit)="openEditModal($event)"
+          (taskDelete)="onDeleteTask($event)"
+          (taskMove)="onMoveTask($event)"
+        ></app-task-column>
+
+        <app-task-column
+          status="doing"
+          title="Em andamento"
+          [tasks]="doingTasks()"
+          (taskEdit)="openEditModal($event)"
+          (taskDelete)="onDeleteTask($event)"
+          (taskMove)="onMoveTask($event)"
+        ></app-task-column>
+
+        <app-task-column
+          status="done"
+          title="Concluídas"
+          [tasks]="doneTasks()"
+          (taskEdit)="openEditModal($event)"
+          (taskDelete)="onDeleteTask($event)"
+          (taskMove)="onMoveTask($event)"
+        ></app-task-column>
+      </div>
+    </main>
+
+  </div>
+</div>

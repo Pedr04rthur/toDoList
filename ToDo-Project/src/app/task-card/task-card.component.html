@@ -1,0 +1,42 @@
+<div 
+  class="p-3 border rounded bg-white shadow-sm cursor-move transition-opacity"
+  draggable="true"
+  (dragstart)="onDragStart($event)"
+  (dragend)="onDragEnd($event)"
+>
+  <div class="flex items-start justify-between gap-2">
+    <div class="flex items-center gap-3">
+      <span 
+        class="dot w-3.5 h-3.5 rounded-full inline-block" 
+        [class]="proximityColor"
+        [title]="'Vence em: ' + task.due"
+      ></span>
+      <div>
+        <div class="font-semibold text-slate-800 text-sm">{{ task.title }}</div>
+        <div class="text-xs text-slate-500">
+          Término: {{ task.due }} • {{ levelLabel }}
+        </div>
+      </div>
+    </div>
+    <div class="text-right flex-shrink-0">
+      <button 
+        (click)="onEdit($event)"
+        class="text-xs text-slate-500 mr-2 hover:text-slate-700"
+      >
+        Editar
+      </button>
+      <button 
+        (click)="onDelete($event)"
+        class="text-xs text-red-500 hover:text-red-700"
+      >
+        Excluir
+      </button>
+    </div>
+  </div>
+  <p 
+    *ngIf="task.desc" 
+    class="mt-2 text-sm text-slate-600"
+  >
+    {{ task.desc }}
+  </p>
+</div>

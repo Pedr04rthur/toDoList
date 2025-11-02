@@ -1,0 +1,22 @@
+<div>
+  <h2 class="font-semibold mb-2 text-slate-700">{{ columnTitle }}</h2>
+  <div 
+    class="space-y-3 min-h-[200px] p-3 bg-white rounded shadow-sm border border-gray-100"
+    (dragover)="onDragOver($event)"
+    (drop)="onDrop($event)"
+  >
+    <app-task-card
+      *ngFor="let task of tasks"
+      [task]="task"
+      (edit)="onTaskEdit($event)"
+      (delete)="onTaskDelete($event)"
+    ></app-task-card>
+    
+    <div 
+      *ngIf="tasks.length === 0" 
+      class="text-center text-slate-400 py-8 text-sm"
+    >
+      Nenhuma tarefa
+    </div>
+  </div>
+</div>
